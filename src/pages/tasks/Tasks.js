@@ -1,19 +1,11 @@
 import React from 'react';
-import { useQuery, gql } from '@apollo/client'
+import { useQuery } from '@apollo/client'
 import { Link } from 'react-router-dom'
 
 import styles from './Tasks.module.scss'
 import TaskItem from '../../components/taskItem'
+import { GET_TODOS } from '../../utils/Queries'
 
-const GET_TODOS = gql`
-    query getTodos {
-        todos {
-            id
-            task
-            description
-        }
-    }
-`
 
 const Tasks = () => {
     const { loading, error, data } = useQuery(GET_TODOS)

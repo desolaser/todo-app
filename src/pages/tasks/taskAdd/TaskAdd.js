@@ -1,22 +1,14 @@
 import React, { useState } from 'react'
-import { gql, useMutation  } from '@apollo/client'
+import { useMutation  } from '@apollo/client'
 
+import { ADD_TODO } from '../../../utils/Queries'
 import styles from './TaskAdd.module.scss'
 
-const ADD_TODO = gql`
-    mutation addTodo($task: String!, $description: String!) {
-        addTodo(task: $task, description: $description) {
-            id
-            task
-            description
-        }
-    }
-`;
 
 const TaskAdd = () => {
     const [task, setTask] = useState('')
     const [description, setDescription] = useState('')
-    const [addTodo, { data }] = useMutation(ADD_TODO)
+    const [addTodo] = useMutation(ADD_TODO)
 
     const handleSubmit = event => {
         event.preventDefault()
