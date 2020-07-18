@@ -4,7 +4,7 @@ import React from 'react';
 const Home = () => {
     return (
         <div>
-            Home component
+            <h1>Todo app, the best app to write down your tasks</h1>
         </div>
     )
 }
