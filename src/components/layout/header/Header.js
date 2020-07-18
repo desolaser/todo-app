@@ -1,18 +1,27 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+import styles from './Header.module.scss'
 
 const Header = () => {
     return (
-        <nav className="header">
-            <div className="header-title">
+        <nav className={styles.header}>
+            <div className={styles.navtitle}>
                 Todo App
             </div>
-            <ul className="header-list">
-                <li><Link className="header-item" href="/">Home</Link></li>
-                <li><Link className="header-item" href="/task">Tasks</Link></li>
-                <li><Link className="header-item" href="/about">About</Link></li>
-                <li><Link className="header-item" href="/contact">Contact</Link></li>
+            <ul className={styles.navlist}>
+                <li className={styles.navitem}>
+                    <Link className={styles.navlink} to="/">Home</Link>
+                </li>
+                <li className={styles.navitem}>
+                    <Link className={styles.navlink} to="/task">Tasks</Link>
+                </li>
+                <li className={styles.navitem}>
+                    <Link className={styles.navlink} to="/about">About</Link>
+                </li>
+                <li className={styles.navitem}>
+                    <Link className={styles.navlink} to="/contact">Contact</Link>
+                </li>
             </ul>
         </nav>
     )

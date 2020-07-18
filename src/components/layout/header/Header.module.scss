@@ -1,0 +1,29 @@
+.header {
+    background-color: #3f3f3f;
+}
+
+.navtitle {
+    color: white;
+    font-size: 2rem;
+    padding: 1rem;    
+    display: inline-block;
+}
+
+.navlist {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    float: right;
+}
+
+.navitem {
+    float: right;
+}
+
+.navlink {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 1.5rem 1.5rem;
+    text-decoration: none;
+}
