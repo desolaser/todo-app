@@ -1,5 +1,6 @@
 import React from 'react';
 import { useQuery, gql } from '@apollo/client'
+import { Link } from 'react-router-dom'
 
 import styles from './Tasks.module.scss'
 import TaskItem from '../../components/taskItem'
@@ -22,7 +23,8 @@ const Tasks = () => {
 
     return (
         <div>
-            <h1 className={styles.title}>Todo's list</h1>
+            <div className={styles.title}>Todo's list</div>
+            <Link className={styles.btnAdd} to="/tasks/add">Add a task</Link>
             <ul className={styles.list}>
                 {data.todos.map((todo) => <TaskItem key={todo.id} todo={todo} />)}
             </ul>

@@ -6,6 +6,7 @@ import Layout from './components/layout'
 
 import Home from './pages/home'
 import Tasks from './pages/tasks'
+import TaskAdd from './pages/tasks/taskAdd'
 import About from './pages/about'
 import Contact from './pages/contact'
 
@@ -18,7 +19,8 @@ function App() {
                 <Layout>
                     <Switch>
                         <Route exact path="/" component={Home}/>
-                        <Route path="/tasks" component={Tasks}/>
+                        <Route exact path="/tasks" component={Tasks}/>
+                        <Route path="/tasks/add" component={TaskAdd}/>
                         <Route path="/about" component={About}/>
                         <Route path="/contact" component={Contact}/>
                     </Switch>
