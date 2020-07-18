@@ -3,7 +3,10 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import Layout from './components/layout'
 
-import Home from './pages/Home'
+import Home from './pages/home'
+import Tasks from './pages/tasks'
+import About from './pages/about'
+import Contact from './pages/contact'
 
 function App() {
     return (
