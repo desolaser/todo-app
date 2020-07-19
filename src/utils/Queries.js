@@ -1,13 +1,13 @@
 import { gql  } from '@apollo/client'
 
 export const ADD_TODO = gql`
-mutation addTodo($task: String!, $description: String!) {
-    addTodo(task: $task, description: $description) {
-        id
-        task
-        description
+    mutation addTodo($task: String!, $description: String!) {
+        addTodo(task: $task, description: $description) {
+            id
+            task
+            description
+        }
     }
-}
 `;
 
 export const GET_TODOS = gql`
@@ -26,12 +26,12 @@ export const GET_TODO = gql`
             id
             task
             description
-        }
+        } 
     }
 `
 
 export const UPDATE_TODO = gql`
-    query updateTodo($id: ID!, $task: String, $description: String!) {
+    mutation updateTodo($id: ID!, $task: String, $description: String!) {
         updateTodo(id: $id, task: $task, description: $description) {
             id
             task
@@ -41,7 +41,7 @@ export const UPDATE_TODO = gql`
 `
 
 export const DELETE_TODO = gql`
-    query deleteTodo($id: ID!) {
+    mutation deleteTodo($id: ID!) {
         deleteTodo(id: $id) {
             id
             task

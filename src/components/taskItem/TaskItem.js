@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 
 import styles from './TaskItem.module.scss'
 
-const TaskItem = ({ todo }) => {
+const TaskItem = ({ todo, deleteTodo }) => {
     return (
         <li className={styles.item}>
             <div className={styles.datacontainer}>
@@ -11,8 +11,8 @@ const TaskItem = ({ todo }) => {
                 <p className={styles.description}><b>Description:</b> {todo.description}</p>
             </div>
             <div className={styles.buttoncontainer}>
-                <Link className={styles.btnedit}>Edit</Link>
-                <button className={styles.btndelete}>Delete</button>
+                <Link to={`/tasks/edit/${todo.id}`} className={styles.btnedit}>Edit</Link>
+                <button className={styles.btndelete} onClick={() => deleteTodo({ variables: { id: todo.id } })}>Delete</button>
             </div>
         </li>
     )
