@@ -21,6 +21,16 @@ const Header = () => {
                         <Link className={styles.navlink} to="/tasks">Tasks</Link>
                     </li>                                    
                 }
+                {!isAuthenticated &&
+                    <>
+                        <li className={styles.navitem}>
+                            <Link className={styles.navlink} to="/login">Login</Link>
+                        </li>
+                        <li className={styles.navitem}>
+                            <Link className={styles.navlink} to="/register">Register</Link>
+                        </li>                        
+                    </>
+                }
                 <li className={styles.navitem}>
                     <Link className={styles.navlink} to="/about">About</Link>
                 </li>
