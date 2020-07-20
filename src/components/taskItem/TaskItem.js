@@ -12,7 +12,12 @@ const TaskItem = ({ todo, deleteTodo }) => {
             </div>
             <div className={styles.buttoncontainer}>
                 <Link to={`/tasks/edit/${todo.id}`} className={styles.btnedit}>Edit</Link>
-                <button className={styles.btndelete} onClick={() => deleteTodo({ variables: { id: todo.id } })}>Delete</button>
+                <button 
+                    className={styles.btndelete} 
+                    onClick={() => deleteTodo({ variables: { id: todo.id }, refetchQueries: ["getTodos"] })}
+                >
+                    Delete
+                </button>
             </div>
         </li>
     )

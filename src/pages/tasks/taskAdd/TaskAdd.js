@@ -18,7 +18,8 @@ const TaskAdd = () => {
             variables: {
                 task,
                 description
-            }
+            },
+            refetchQueries: ["getTodos"],
         })
         alert('Task added')
         setTask('')

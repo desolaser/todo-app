@@ -29,7 +29,8 @@ const TaskEdit = ({ match }) => {
                 id: match.params.id,
                 task,
                 description
-            }
+            },
+            refetchQueries: ["getTodos"],
         })
         alert('Task updated')
         return 1
