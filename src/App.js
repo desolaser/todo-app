@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import { ApolloProvider } from '@apollo/client'
 
@@ -18,9 +18,17 @@ import client from './utils/ApolloClient'
 import { AuthContext } from "./context/auth";
 
 function App() {
+    const existingTokens = JSON.parse(localStorage.getItem("tokens"));
+    const [authTokens, setAuthTokens] = useState(existingTokens);
+    
+    const setTokens = (data) => {
+        localStorage.setItem("tokens", JSON.stringify(data));
+        setAuthTokens(data);
+    }
+
     return (        
         <ApolloProvider client={client}>            
-            <AuthContext.Provider value={false}>
+            <AuthContext.Provider value={{authTokens, setAuthTokens: setTokens }}>
                 <Router>
                     <Layout>
                         <Switch>

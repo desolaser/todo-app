@@ -6,9 +6,9 @@ const Form = props => {
         <div>
             <div className={styles.title}>{props.title}</div>
             <form className={styles.form} onSubmit={props.handleSubmit}>
-                {props.fields.map(field => {
+                {props.fields.map((field, index) => {
                     return (
-                        <div className={styles.formControl}>
+                        <div key={index} className={styles.formControl}>
                             <label className={styles.formLabel}>{field.labelName}</label>
                             <input className={styles.formInput} type={field.type} value={field.value} onChange={field.onChange} />
                         </div>
