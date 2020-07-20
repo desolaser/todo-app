@@ -11,6 +11,8 @@ import TaskAdd from './pages/tasks/taskAdd'
 import TaskEdit from './pages/tasks/taskEdit'
 import About from './pages/about'
 import Contact from './pages/contact'
+import Login from './pages/login'
+import Register from './pages/register'
 
 import client from './utils/ApolloClient'
 import { AuthContext } from "./context/auth";
@@ -25,6 +27,8 @@ function App() {
                             <Route exact path="/" component={Home}/>
                             <Route path="/about" component={About}/>
                             <Route path="/contact" component={Contact}/>
+                            <Route path="/login" component={Login} />
+                            <Route path="/register" component={Register} />
                             <PrivateRoute exact path="/tasks" component={Tasks}/>
                             <PrivateRoute path="/tasks/add" component={TaskAdd}/>
                             <PrivateRoute path="/tasks/edit/:id" component={TaskEdit}/>
