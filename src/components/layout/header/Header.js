@@ -1,9 +1,12 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React from 'react'
+import { Link } from 'react-router-dom'
+import { useAuth } from '../../../context/auth'
 
 import styles from './Header.module.scss'
 
 const Header = () => {
+    const isAuthenticated = useAuth()
+
     return (
         <nav className={styles.header}>
             <div className={styles.navtitle}>
@@ -13,9 +16,11 @@ const Header = () => {
                 <li className={styles.navitem}>
                     <Link className={styles.navlink} to="/">Home</Link>
                 </li>
-                <li className={styles.navitem}>
-                    <Link className={styles.navlink} to="/tasks">Tasks</Link>
-                </li>
+                {isAuthenticated &&
+                    <li className={styles.navitem}>
+                        <Link className={styles.navlink} to="/tasks">Tasks</Link>
+                    </li>                                    
+                }
                 <li className={styles.navitem}>
                     <Link className={styles.navlink} to="/about">About</Link>
                 </li>
