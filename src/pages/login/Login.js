@@ -31,17 +31,7 @@ const Login = () => {
 
     const handleSubmit = e => {
         e.preventDefault()
-        mutation({ variables: { email, password }})       
-
-        const login = (email, password) => {
-            return mutation({
-                variables: {
-                    email,
-                    password,
-                },
-            });
-        }
-        
+        const login = mutation({ variables: { email, password }})        
         return [login, mutationResults]
     }
 

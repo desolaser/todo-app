@@ -1,24 +1,28 @@
 import React, { useState } from 'react'
 import { Redirect } from 'react-router-dom'
-import { useAuth } from '../../context/auth'
+import { useMutation } from '@apollo/client'
+
+import { REGISTER } from '../../utils/Queries'
 
 import Form from '../../components/form'
 
 const Register = () => {
-    const [isLoggedIn, setLoggedIn] = useState(false);
     const [isError, setIsError] = useState(false);
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [repeatPassword, setRepeatPassword] = useState("");
-    const { setAuthTokens } = useAuth();
-
-    if(isLoggedIn) {
-        return <Redirect to="/tasks" />        
-    }
+    const [register] = useMutation(REGISTER)
 
     const handleSubmit = e => {
         e.preventDefault()
+        if (email === "") return alert("Fill email field")
+        if (password === "") return alert("Fill password field")
+        if (repeatPassword === "") return alert("Fill repeat password field")
         if (password !== repeatPassword) return setIsError(true)
+        register({ variables: { email, password } })
+        alert("Registration successful, now you can log in")
+
+        return <Redirect to='/login' />
     }
 
     const fields = [
@@ -45,7 +49,7 @@ const Register = () => {
     return (
         <div>
             <Form title="Register form" handleSubmit={handleSubmit} fields={fields} submitValue="Register" />
-            { isError && <div style={{ color: "red" }}>The username or password provided were incorrect!</div> }
+            { isError && <div style={{ color: "red" }}>Password and repeated password aren't the same</div> }
         </div>
     )
 }
