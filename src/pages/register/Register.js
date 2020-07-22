@@ -5,6 +5,7 @@ import { useMutation } from '@apollo/client'
 import { REGISTER } from '../../utils/Queries'
 
 import Form from '../../components/form'
+import Error from '../../components/error'
 
 const Register = () => {
     const [error, setError] = useState("")
@@ -49,7 +50,7 @@ const Register = () => {
     return (
         <div>
             <Form title="Register form" handleSubmit={handleSubmit} fields={fields} submitValue="Register" />
-            { error && <div style={{ color: "red" }}>{error}</div> }
+            { error && <Error>{error}</Error> }
         </div>
     )
 }

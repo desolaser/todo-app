@@ -6,6 +6,7 @@ import { useMutation } from '@apollo/client'
 import { LOGIN } from '../../utils/Queries'
 
 import Form from '../../components/form'
+import Error from '../../components/error'
 
 const Login = () => {
     const [isLoggedIn, setLoggedIn] = useState(false)
@@ -57,7 +58,7 @@ const Login = () => {
         <div>
             <Form title="Log in form" handleSubmit={handleSubmit} fields={fields} submitValue="Log In" />
             <Link to="/register">Don't have an account?</Link>
-            { error && <div style={{ color: "red" }}>{error}</div> }
+            { error && <Error>{error}</Error> }
         </div>
     )
 }
