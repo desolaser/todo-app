@@ -3,16 +3,18 @@ import { useMutation  } from '@apollo/client'
 
 import { ADD_TODO } from '../../../utils/Queries'
 import Form from '../../../components/form'
+import Error from '../../../components/error'
 
 const TaskAdd = () => {
     const [task, setTask] = useState('')
     const [description, setDescription] = useState('')
+    const [error, setError] = useState('')
     const [addTodo] = useMutation(ADD_TODO)
 
     const handleSubmit = event => {
         event.preventDefault()
-        if(!task) return alert('Fill task field')
-        if(!description) return alert('Fill description field')
+        if(!task) return setError('You must fill task field')
+        if(!description) return setError('You must fill description field')
         addTodo({
             variables: {
                 task,
@@ -20,10 +22,10 @@ const TaskAdd = () => {
             },
             refetchQueries: ["getTodos"],
         })
-        alert('Task added')
         setTask('')
         setDescription('')
-        return 1
+        setError('')
+        return alert('Task added')
     }
     
     const fields = [
@@ -42,7 +44,10 @@ const TaskAdd = () => {
     ]
  
     return (
-        <Form title="Add Todo" handleSubmit={handleSubmit} fields={fields} submitValue="Submit" />
+        <div>
+            <Form title="Edit Todo" handleSubmit={handleSubmit} fields={fields} submitValue="Submit" />
+            { error && <Error>{error}</Error> }
+        </div>
     )
 }
 
