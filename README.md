@@ -1,7 +1,7 @@
 # React graphql todo app
 
 This is an app made with React that uses graphQL apollo client to fetch
-data from a graphQL apollo server.
+data from a graphQL apollo server with user authentication.
 
 # Dependencies
 
