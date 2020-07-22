@@ -49,3 +49,26 @@ export const DELETE_TODO = gql`
         }
     }
 `
+
+export const REGISTER = gql`
+    mutation register($email: String!, $password: String!) {
+        register(email: $email, password: $password) {
+            id
+            email
+            password
+        }
+    }  
+`
+
+export const LOGIN = gql`
+    mutation login($email: String!, $password: String!) {
+        login(email: $email, password: $password) {
+            token
+            user {
+                id
+                email
+                password
+            }
+        }
+    }
+`

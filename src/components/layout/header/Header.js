@@ -5,7 +5,11 @@ import { useAuth } from '../../../context/auth'
 import styles from './Header.module.scss'
 
 const Header = () => {
-    const isAuthenticated = useAuth()
+    const { authTokens, setAuthTokens } = useAuth()
+
+    const logout = () => {
+        setAuthTokens("")
+    }
 
     return (
         <nav className={styles.header}>
@@ -16,12 +20,17 @@ const Header = () => {
                 <li className={styles.navitem}>
                     <Link className={styles.navlink} to="/">Home</Link>
                 </li>
-                {isAuthenticated &&
-                    <li className={styles.navitem}>
-                        <Link className={styles.navlink} to="/tasks">Tasks</Link>
-                    </li>                                    
+                {authTokens &&
+                    <>
+                        <li className={styles.navitem}>
+                            <Link className={styles.navlink} to="/tasks">Tasks</Link>
+                        </li>
+                        <li className={styles.navitem}>
+                            <div className={styles.navlink} onClick={logout}>Logout</div>
+                        </li> 
+                    </>     
                 }
-                {!isAuthenticated &&
+                {!authTokens &&
                     <>
                         <li className={styles.navitem}>
                             <Link className={styles.navlink} to="/login">Login</Link>

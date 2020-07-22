@@ -2,14 +2,28 @@ import React, { useState } from 'react'
 import { Link, Redirect } from 'react-router-dom'
 import { useAuth } from '../../context/auth'
 
+import { useMutation } from '@apollo/client'
+import { LOGIN } from '../../utils/Queries'
+
 import Form from '../../components/form'
 
-const Login = () => {    
-    const [isLoggedIn, setLoggedIn] = useState(false);
-    const [isError, setIsError] = useState(false);
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const { setAuthTokens } = useAuth();
+const Login = () => {
+    const [isLoggedIn, setLoggedIn] = useState(false)
+    const [isError, setIsError] = useState(false)
+    const [email, setEmail] = useState("")
+    const [password, setPassword] = useState("")
+    const { setAuthTokens } = useAuth()
+
+    const [mutation, mutationResults] = useMutation(LOGIN, {
+        onCompleted: (data) => {
+            setAuthTokens(data.login.token)
+            setLoggedIn(true)
+        },
+        onError: (error) => {
+            console.log(error)
+            setIsError(true)
+        }
+    })
 
     if(isLoggedIn) {
         return <Redirect to="/tasks" />
@@ -17,8 +31,19 @@ const Login = () => {
 
     const handleSubmit = e => {
         e.preventDefault()
-        console.log(email, password)
-    }    
+        mutation({ variables: { email, password }})       
+
+        const login = (email, password) => {
+            return mutation({
+                variables: {
+                    email,
+                    password,
+                },
+            });
+        }
+        
+        return [login, mutationResults]
+    }
 
     const fields = [
         {
