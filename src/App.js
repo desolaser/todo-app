@@ -15,7 +15,7 @@ import Login from './pages/login'
 import Register from './pages/register'
 
 import client from './utils/ApolloClient'
-import AuthProvider from "./context/AuthProvider";
+import AuthProvider from "./context/AuthProvider"
 
 function App() {
     return (        

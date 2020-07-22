@@ -12,11 +12,12 @@ const Login = () => {
     const [isError, setIsError] = useState(false)
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
-    const { setAuthTokens } = useAuth()
+    const { setAuthTokens, setUser } = useAuth()
 
     const [mutation, mutationResults] = useMutation(LOGIN, {
         onCompleted: (data) => {
             setAuthTokens(data.login.token)
+            setUser(data.login.user)
             setLoggedIn(true)
         },
         onError: (error) => {
