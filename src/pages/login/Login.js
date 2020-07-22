@@ -9,7 +9,7 @@ import Form from '../../components/form'
 
 const Login = () => {
     const [isLoggedIn, setLoggedIn] = useState(false)
-    const [isError, setIsError] = useState(false)
+    const [error, setError] = useState("")
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const { setAuthTokens, setUser } = useAuth()
@@ -21,8 +21,8 @@ const Login = () => {
             setLoggedIn(true)
         },
         onError: (error) => {
-            console.log(error)
-            setIsError(true)
+            console.log(error.message)
+            setError(error.message)
         }
     })
 
@@ -32,6 +32,8 @@ const Login = () => {
 
     const handleSubmit = e => {
         e.preventDefault()
+        if (email === "") return setError("Fill email field")
+        if (password === "") return setError("Fill password field")
         const login = mutation({ variables: { email, password }})        
         return [login, mutationResults]
     }
@@ -55,7 +57,7 @@ const Login = () => {
         <div>
             <Form title="Log in form" handleSubmit={handleSubmit} fields={fields} submitValue="Log In" />
             <Link to="/register">Don't have an account?</Link>
-            { isError && <div style={{ color: "red" }}>The username or password provided were incorrect!</div> }
+            { error && <div style={{ color: "red" }}>{error}</div> }
         </div>
     )
 }

@@ -7,7 +7,7 @@ import { REGISTER } from '../../utils/Queries'
 import Form from '../../components/form'
 
 const Register = () => {
-    const [isError, setIsError] = useState(false);
+    const [error, setError] = useState("")
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [repeatPassword, setRepeatPassword] = useState("");
@@ -15,13 +15,13 @@ const Register = () => {
 
     const handleSubmit = e => {
         e.preventDefault()
-        if (email === "") return alert("Fill email field")
-        if (password === "") return alert("Fill password field")
-        if (repeatPassword === "") return alert("Fill repeat password field")
-        if (password !== repeatPassword) return setIsError(true)
+        if (email === "") return setError("Fill email field")
+        if (password === "") return setError("Fill password field")
+        if (repeatPassword === "") return setError("Fill repeat password field")
+        if (password !== repeatPassword) return setError("Password and repeated password aren't the same")
         register({ variables: { email, password } })
         alert("Registration successful, now you can log in")
-
+        setError()
         return <Redirect to='/login' />
     }
 
@@ -49,7 +49,7 @@ const Register = () => {
     return (
         <div>
             <Form title="Register form" handleSubmit={handleSubmit} fields={fields} submitValue="Register" />
-            { isError && <div style={{ color: "red" }}>Password and repeated password aren't the same</div> }
+            { error && <div style={{ color: "red" }}>{error}</div> }
         </div>
     )
 }
