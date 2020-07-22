@@ -2,12 +2,12 @@ import React, { useState } from 'react'
 import { useMutation, useQuery } from '@apollo/client'
 
 import { UPDATE_TODO, GET_TODO } from '../../../utils/Queries'
-import styles from './TaskEdit.module.scss'
-
+import Form from '../../../components/form'
 
 const TaskEdit = ({ match }) => {
     const [task, setTask] = useState('')
     const [description, setDescription] = useState('')
+    const [updateTodo] = useMutation(UPDATE_TODO)
     const { loading, error } = useQuery(GET_TODO, {
         variables: {
             id: match.params.id
@@ -16,11 +16,10 @@ const TaskEdit = ({ match }) => {
             setTask(data.todo.task);
             setDescription(data.todo.description);
         }
-    })
-    const [updateTodo] = useMutation(UPDATE_TODO)
+    })    
 
-    if (loading) return <div className={styles.loading}>Loading...</div>;
-    if (error) return <div className={styles.error}>Error :(</div>;
+    if (loading) return <div>Loading...</div>;
+    if (error) return <div>Error :(</div>;
 
     const handleSubmit = event => {
         event.preventDefault()
@@ -35,22 +34,24 @@ const TaskEdit = ({ match }) => {
         alert('Task updated')
         return 1
     }
+    
+    const fields = [
+        {
+            labelName: "Task",
+            type: "text",
+            value: task,
+            onChange: e => setTask(e.target.value)
+        },
+        {
+            labelName: "Description",
+            type: "text",
+            value: description,
+            onChange: e => setDescription(e.target.value)
+        },
+    ]
  
     return (
-        <div>
-            <div className={styles.title}>Edit Todo</div>
-            <form className={styles.form} onSubmit={handleSubmit}>
-                <div className={styles.formControl}>
-                    <label className={styles.formLabel}>Task</label>
-                    <input className={styles.formInput} type="text" value={task} onChange={e => setTask(e.target.value)} />
-                </div>
-                <div className={styles.formControl}>
-                    <label className={styles.formLabel}>Description</label>
-                    <input className={styles.formInput} type="text" value={description} onChange={e => setDescription(e.target.value)} />
-                </div>
-                <input className={styles.formSubmit} type="submit" value="Submit" />
-            </form>
-        </div>
+        <Form title="Add Todo" handleSubmit={handleSubmit} fields={fields} submitValue="Submit" />
     )
 }
 

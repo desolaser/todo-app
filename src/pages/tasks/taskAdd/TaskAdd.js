@@ -2,8 +2,7 @@ import React, { useState } from 'react'
 import { useMutation  } from '@apollo/client'
 
 import { ADD_TODO } from '../../../utils/Queries'
-import styles from './TaskAdd.module.scss'
-
+import Form from '../../../components/form'
 
 const TaskAdd = () => {
     const [task, setTask] = useState('')
@@ -26,22 +25,24 @@ const TaskAdd = () => {
         setDescription('')
         return 1
     }
+    
+    const fields = [
+        {
+            labelName: "Task",
+            type: "text",
+            value: task,
+            onChange: e => setTask(e.target.value)
+        },
+        {
+            labelName: "Description",
+            type: "text",
+            value: description,
+            onChange: e => setDescription(e.target.value)
+        },
+    ]
  
     return (
-        <div>
-            <div className={styles.title}>Add Todo</div>
-            <form className={styles.form} onSubmit={handleSubmit}>
-                <div className={styles.formControl}>
-                    <label className={styles.formLabel}>Task</label>
-                    <input className={styles.formInput} type="text" value={task} onChange={e => setTask(e.target.value)} />
-                </div>
-                <div className={styles.formControl}>
-                    <label className={styles.formLabel}>Description</label>
-                    <input className={styles.formInput} type="text" value={description} onChange={e => setDescription(e.target.value)} />
-                </div>
-                <input className={styles.formSubmit} type="submit" value="Submit" />
-            </form>
-        </div>
+        <Form title="Add Todo" handleSubmit={handleSubmit} fields={fields} submitValue="Submit" />
     )
 }
 
