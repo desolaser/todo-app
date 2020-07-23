@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { useMutation, useQuery } from '@apollo/client'
+import { useAuth } from '../../../context/auth'
 
 import { UPDATE_TODO, GET_TODO } from '../../../utils/Queries'
 import Form from '../../../components/form'
@@ -9,6 +10,7 @@ const TaskEdit = ({ match }) => {
     const [task, setTask] = useState('')
     const [description, setDescription] = useState('')
     const [error, setError] = useState('')
+    const { user } = useAuth()
     const [updateTodo] = useMutation(UPDATE_TODO)
     const { loading, graphqlError } = useQuery(GET_TODO, {
         variables: {
@@ -31,9 +33,10 @@ const TaskEdit = ({ match }) => {
             variables: {
                 id: match.params.id,
                 task,
-                description
+                description,
+                userId: user.id
             },
-            refetchQueries: ["getTodos"],
+            refetchQueries: ["getUserTodos"],
         })
         setError('')
         return alert('Task updated')

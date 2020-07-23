@@ -1,9 +1,12 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { useAuth } from '../../context/auth'
 
 import styles from './TaskItem.module.scss'
 
 const TaskItem = ({ todo, deleteTodo }) => {
+    const { user } = useAuth()
+
     return (
         <li className={styles.item}>
             <div className={styles.datacontainer}>
@@ -14,7 +17,12 @@ const TaskItem = ({ todo, deleteTodo }) => {
                 <Link to={`/tasks/edit/${todo.id}`} className={styles.btnedit}>Edit</Link>
                 <button 
                     className={styles.btndelete} 
-                    onClick={() => deleteTodo({ variables: { id: todo.id }, refetchQueries: ["getTodos"] })}
+                    onClick={
+                        () => deleteTodo({ 
+                            variables: { id: todo.id, userId: user.id }, 
+                            refetchQueries: ["getUserTodos"]                     
+                        })
+                    }
                 >
                     Delete
                 </button>

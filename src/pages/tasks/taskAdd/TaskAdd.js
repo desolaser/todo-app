@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { useMutation  } from '@apollo/client'
+import { useAuth } from '../../../context/auth'
 
 import { ADD_TODO } from '../../../utils/Queries'
 import Form from '../../../components/form'
@@ -9,6 +10,7 @@ const TaskAdd = () => {
     const [task, setTask] = useState('')
     const [description, setDescription] = useState('')
     const [error, setError] = useState('')
+    const { user } = useAuth()
     const [addTodo] = useMutation(ADD_TODO)
 
     const handleSubmit = event => {
@@ -18,9 +20,10 @@ const TaskAdd = () => {
         addTodo({
             variables: {
                 task,
-                description
+                description,
+                userId: user.id
             },
-            refetchQueries: ["getTodos"],
+            refetchQueries: ["getUserTodos"],
         })
         setTask('')
         setDescription('')
