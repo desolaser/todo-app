@@ -15,3 +15,11 @@ data from a graphQL apollo server with user authentication.
 2. In the root of the app use ```npm start```
 3. You are ready!
 
+# Todo
+
+1. Change user data and token location to cookies
+2. Add lazy loading and suspense features
+3. Tasks have to be separated by user
+4. User redux store to save global data
+5. Improve page design, to be mobile first
+6. Convert the app in a PWA

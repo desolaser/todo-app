@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom'
 
 import styles from './Tasks.module.scss'
 import TaskItem from '../../components/taskItem'
+import Loading from '../../components/loading'
+import Error from '../../components/error'
 import { GET_TODOS, DELETE_TODO } from '../../utils/Queries'
 
 
@@ -11,8 +13,8 @@ const Tasks = () => {
     const { loading, error, data } = useQuery(GET_TODOS)
     const [deleteTodo] = useMutation(DELETE_TODO)
 
-    if (loading) return <div className={styles.loading}>Loading...</div>;
-    if (error) return <div className={styles.error}>Error :(</div>;
+    if (loading) return <Loading>Loading...</Loading>;
+    if (error) return <Error>{error.message}</Error>;
 
     return (
         <div>
