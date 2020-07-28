@@ -25,10 +25,7 @@ const Tasks = () => {
             <div className={styles.title}>Todo's list</div>
             <Link className={styles.btnAdd} to="/tasks/add">Add a task</Link>
             <ul className={styles.list}>
-                {todos === null ? 
-                    todos.map((todo) => <TaskItem key={todo.id} todo={todo} deleteTodo={deleteTodo}/>) :
-                    <Loading>No tasks assigned, add new tasks</Loading>
-                }
+                {todos.map((todo) => <TaskItem key={todo.id} todo={todo} deleteTodo={deleteTodo}/>)}
             </ul>
         </div>
     )
